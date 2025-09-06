@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Vagas - Clínicas Odontológicas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f7fd;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a8ff9 0%, #0a68c9 100%);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 20px;
+        }
+        
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .section-title {
+            color: #0a68c9;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            font-size: 1.6rem;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -10px 15px;
+        }
+        
+        .form-group {
+            flex: 1 0 300px;
+            padding: 0 10px;
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+        
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #1a8ff9;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(26, 143, 249, 0.2);
+        }
+        
+        .checkbox-group, .radio-group {
+            margin: 10px 0;
+        }
+        
+        .checkbox-group label, .radio-group label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+        
+        .checkbox-group input, .radio-group input {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+        }
+        
+        .specialties-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .btn-submit {
+            background: linear-gradient(135deg, #1a8ff9 0%, #0a68c9 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 0;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 143, 249, 0.4);
+        }
+        
+        .required {
+            color: #e74c3c;
+        }
+        
+        .address-fields {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-group {
+                flex: 1 0 100%;
+            }
+            
+            .specialties-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .address-fields {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Cadastro de Vagas</h1>
+            <p>Preencha as informações da vaga para clínicas odontológicas</p>
+        </header>
+        
+        <div class="form-container">
+            <form id="jobForm">
+                <!-- Seção de Informações Básicas -->
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <i>📋</i> Informações Básicas
+                    </h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome">Nome da Clínica <span class="required">*</span></label>
+                            <input type="text" id="nome" name="nome" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contato">Contato <span class="required">*</span></label>
+                            <input type="tel" id="contato" name="contato" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Seção de Endereço -->
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <i>📍</i> Localização
+                    </h2>
+                    
+                    <div class="form-group">
+                        <label for="cep">CEP <span class="required">*</span></label>
+                        <input type="text" id="cep" name="cep" required>
+                    </div>
+                    
+                    <div class="address-fields">
+                        <div class="form-group">
+                            <label for="endereco">Endereço <span class="required">*</span></label>
+                            <input type="text" id="endereco" name="endereco" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="bairro">Bairro <span class="required">*</span></label>
+                            <input type="text" id="bairro" name="bairro" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="zona">Zona <span class="required">*</span></label>
+                            <input type="text" id="zona" name="zona" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="municipio">Município <span class="required">*</span></label>
+                            <input type="text" id="municipio" name="municipio" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="estado">Estado <span class="required">*</span></label>
+                            <select id="estado" name="estado" required>
+                                <option value="">Selecione</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Seção de Detalhes da Vaga -->
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <i>💼</i> Detalhes da Vaga
+                    </h2>
+                    
+                    <div class="form-group">
+                        <label>Alojamento <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="alojamento" value="sim" required> Sim
+                            </label>
+                            <label>
+                                <input type="radio" name="alojamento" value="nao"> Não
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Horário de Trabalho <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="horario" value="comercial" required> Comercial padrão (08:00 às 18:00, com duas horas de almoço)
+                            </label>
+                            <label>
+                                <input type="radio" name="horario" value="8h-modificacoes"> 8h com modificações
+                            </label>
+                            <label>
+                                <input type="radio" name="horario" value="mais-8h"> Mais que 8 horas
+                            </label>
+                            <label>
+                                <input type="radio" name="horario" value="menos-8h"> Menos que 8 horas
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Forma de Pagamento <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="pagamento" value="porcentagem" required> Porcentagem
+                            </label>
+                            <label>
+                                <input type="radio" name="pagamento" value="diaria"> Diária
+                            </label>
+                            <label>
+                                <input type="radio" name="pagamento" value="clt"> CLT
+                            </label>
+                            <label>
+                                <input type="radio" name="pagamento" value="prolabore"> Prolabore
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Mínimo Garantido <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="minimo_garantido" value="sim" required> Sim
+                            </label>
+                            <label>
+                                <input type="radio" name="minimo_garantido" value="nao"> Não
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="observacao">Observação (Valor da Porcentagem)</label>
+                        <textarea id="observacao" name="observacao" rows="3"></textarea>
+                    </div>
+                </div>
+                
+                <!-- Seção de Tipo de Vaga e Especialidades -->
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <i>🦷</i> Tipo de Vaga e Especialidades
+                    </h2>
+                    
+                    <div class="form-group">
+                        <label>Tipo de Vaga <span class="required">*</span></label>
+                        <div class="radio-group">
+                            <label>
+                                <input type="radio" name="tipo_vaga" value="dentista" required> Dentista
+                            </label>
+                            <label>
+                                <input type="radio" name="tipo_vaga" value="protetico"> Protético
+                            </label>
+                            <label>
+                                <input type="radio" name="tipo_vaga" value="asb-tsb"> ASB ou TSB
+                            </label>
+                            <label>
+                                <input type="radio" name="tipo_vaga" value="estagios"> Estágios
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" id="especialidades-container" style="display: none;">
+                        <label>Especialidades (Selecione uma ou mais)</label>
+                        <div class="specialties-container">
+                            <label>
+                                <input type="checkbox" name="especialidades" value="clinica_geral"> Clínica geral
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="endodontia"> Endodontia
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="cirurgia_oral_menor"> Cirurgia oral menor
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="cirurgia_bucomaxilofacial"> Cirurgia Bucomaxilofacial
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="periodontia"> Periodontia
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="dentistica"> Dentística - lentes ou facetas e mais
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="protese"> Prótese
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="odontogeriatria"> Odontogeriatria
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="odontolegal"> Odontolegal
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="pne"> PNE
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="odontopediatria"> Odontopediatria
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="saude_publica"> Saúde Pública/Saúde coletiva
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="acunpultura_facial"> Acunpultura facial
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="radiologia"> Radiologia/Imagiologia
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="implantodontia"> Implantodontia
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="ortodontia"> Ortodontia
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="odontologia_digital"> Odontologia digital
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="odontologia_esporte"> Odontologia do esporte
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="odontologia_trabalho"> Odontologia do trabalho
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="patologia_oral"> Patologia oral e maxilo facial
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="estomatologia"> Estomatologia
+                            </label>
+                            <label>
+                                <input type="checkbox" name="especialidades" value="disfuncao_temporomandibular"> Disfunção temporomandibular e Dor orofacial
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-submit">Cadastrar Vaga</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Mostrar/ocultar especialidades quando o tipo de vaga for selecionado
+        document.querySelectorAll('input[name="tipo_vaga"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const especialidadesContainer = document.getElementById('especialidades-container');
+                especialidadesContainer.style.display = this.value === 'dentista' ? 'block' : 'none';
+            });
+        });
+        
+        // Validação do formulário
+        document.getElementById('jobForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validação básica
+            let isValid = true;
+            
+            document.querySelectorAll('input[required]').forEach(input => {
+                if (!input.value) {
+                    isValid = false;
+                    input.style.borderColor = 'red';
+                } else {
+                    input.style.borderColor = '#ddd';
+                }
+            });
+            
+            if (isValid) {
+                alert('Formulário enviado com sucesso!');
+                // Aqui você pode adicionar código para enviar os dados para o servidor
+            } else {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+            }
+        });
+        
+        // Buscar CEP (exemplo simplificado)
+        document.getElementById('cep').addEventListener('blur', function() {
+            // Em uma implementação real, você faria uma requisição para uma API de CEP
+            console.log('Buscar endereço para o CEP:', this.value);
+            // Simulando resposta da API
+            /* 
+            document.getElementById('endereco').value = 'Rua Exemplo';
+            document.getElementById('bairro').value = 'Centro';
+            document.getElementById('municipio').value = 'São Paulo';
+            document.getElementById('estado').value = 'SP';
+            */
+        });
+    </script>
+</body>
+</html>
